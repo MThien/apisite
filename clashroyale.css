@@ -4,7 +4,7 @@
     width:100%;
     text-align: center;
     }
-    h1, h2, h3{
+    h1, h2,{
     font-family: verdana, sans-serif;
     width:100%;
     text-align: center;
@@ -39,7 +39,7 @@
       text-align: center;
       padding: 14px 16px;
       text-decoration: none;
-      font-size: 17px;
+      font-size: 23px;
     }
 
     .topnav a:hover {

@@ -13,11 +13,7 @@ myfile3 = open("apipage3.html", "w")
 myfile4 = open("apipage4.html", "w")
 
 ############Wifi Testing
-try: #Tries to access google.com. If it works continue with code
-    x = requests.get("http://google.com")
-except ConnectionError as e: #if google.com cannot be accessed, the code displays a message saying there was a wifi error
-    messagebox.showinfo("WiFi Error", "Please Connect with WiFi to continue")
-    exit() #crashes code "kill all"
+ #crashes code "kill all"
     
 ############Creates a function for the button##############
 def processBtn():
@@ -55,13 +51,18 @@ def processBtn():
             
             #writes code onto the first file
             myfile1.write("""
-            <head> <link rel = "stylesheet" type = "text/css" href = "clashroyale.css" /></head>
+            <head> <link rel = "stylesheet" type = "text/css" href = "clashroyale.css" /><title>Personal Statistics</title>
+            <meta name="viewport" content="width=device-width, initial-scale=1"> <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+            <meta name="viewport" content="width=device-width, initial-scale=1"> <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+            <meta name="viewport" content="width=device-width, initial-scale=1"> <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+            <meta name="viewport" content="width=device-width, initial-scale=1"> <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+            </head>
             <body>
             <div class="topnav">
-                <a  class = "active" href="apipage1.html">Personal Statistics</a>
-                <a href="apipage2.html">Cards & Decks</a>
-                <a href="apipage3.html">Achievements</a>
-                <a href = "apipage4.html">Upcoming Chests</a>
+                <a class = "active" href="apipage1.html"><i class="material-icons" style="font-size:24px">group</i> Personal Statistics</a>
+                <a href="apipage2.html"> <i class="fa fa-id-card-o" style="font-size:24px"></i> Cards & Decks</a>
+                <a href="apipage3.html"> <i class="fa fa-check-circle" style="font-size:24px"></i> Achievements</a>
+                <a href = "apipage4.html"> <i class="fa fa-gift" style="font-size:24px"></i> Upcoming Chests</a>
             </div>
             <img src = """"banner.jpg"""" width = 100%>
             <h1>"""+str(userdata['name'])+ """'s Clash Royale Statistics</h1>
@@ -108,18 +109,23 @@ def processBtn():
             myfile1.write("</table></body>")
             myfile1.close()
             myfile2.write("""
-            <head> <link rel = "stylesheet" type = "text/css" href = "clashroyale.css" /></head>
+            <head> <link rel = "stylesheet" type = "text/css" href = "clashroyale.css" /><title>Cards & Decks</title>
+            <meta name="viewport" content="width=device-width, initial-scale=1"> <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+            <meta name="viewport" content="width=device-width, initial-scale=1"> <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+            <meta name="viewport" content="width=device-width, initial-scale=1"> <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+            <meta name="viewport" content="width=device-width, initial-scale=1"> <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+            </head>
             <body>
             <div class="topnav">
-                <a href="apipage1.html">Personal Statistics</a>
-                <a class = "active" href="apipage2.html">Cards & Decks</a>
-                <a href="apipage3.html">Achievements</a>
-                <a href = "apipage4.html">Upcoming Chests</a>
+                <a href="apipage1.html"><i class="material-icons" style="font-size:24px">group</i> Personal Statistics</a>
+                <a class = "active" href="apipage2.html"> <i class="fa fa-id-card-o" style="font-size:24px"></i> Cards & Decks</a>
+                <a href="apipage3.html"> <i class="fa fa-check-circle" style="font-size:24px"></i> Achievements</a>
+                <a href = "apipage4.html"> <i class="fa fa-gift" style="font-size:24px"></i> Upcoming Chests</a>
             </div>
             <img src = """"banner.jpg"""" width = 100%>
             <h1>"""+str(userdata['name'])+ """'s Cards and Decks</h1>
             <h2>Cards and Deck Information - """+str(userdata['name'])+"""</h2>
-            <h3>The last 8 cards form your deck!</h3>
+            <h3>The first 8 cards form your deck!</h3>
             <table>
               <tr>
                 <th>Card Name</th>
@@ -130,28 +136,33 @@ def processBtn():
             """)
             #for loop finds the number of data points when parsing
             #continues creating new rows until all the cards are displayed
-            for i in range(len(userdata['cards'])):
-                myfile2.write("""
-                <tr>
-                  <th>Card Name: """+ str(userdata['cards'][i]['name']) + """</th>
-                  <th>Lvl """+ str(userdata['cards'][i]['level'])+ """</th>
-                  <th><img src = """+ userdata['cards'][i]['iconUrls']['medium'] +""" width = "100"></th>
-                  <th>Number of Cards: """+ str(userdata['cards'][i]['count']) + """</th>
-                </tr>
-                """)
+            for i in range((len(userdata['cards'])-1), 0, -1):
+                    myfile2.write("""
+                    <tr>
+                      <th>Card Name: """+ str(userdata['cards'][i]['name']) + """</th>
+                      <th>Lvl """+ str(userdata['cards'][i]['level'])+ """</th>
+                      <th><img src = """+ userdata['cards'][i]['iconUrls']['medium'] +""" width = "100"></th>
+                      <th>Number of Cards: """+ str(userdata['cards'][i]['count']) + """</th>
+                    </tr>
+                    """)
             myfile2.write("""
             </table></body>
             """)
             myfile2.close()
             #finishes writing on myfile2 and opens myfile3
             myfile3.write("""
-            <head> <link rel = "stylesheet" type = "text/css" href = "clashroyale.css" /></head>
+            <head> <link rel = "stylesheet" type = "text/css" href = "clashroyale.css" /><title>Achievements</title>
+            <meta name="viewport" content="width=device-width, initial-scale=1"> <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+            <meta name="viewport" content="width=device-width, initial-scale=1"> <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+            <meta name="viewport" content="width=device-width, initial-scale=1"> <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+            <meta name="viewport" content="width=device-width, initial-scale=1"> <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+            </head>
             <body>
             <div class="topnav">
-                <a href="apipage1.html">Personal Statistics</a>
-                <a href="apipage2.html">Cards & Decks</a>
-                <a class = "active" href="apipage3.html">Achievements</a>
-                <a href = "apipage4.html">Upcoming Chests</a>
+                <a href="apipage1.html"><i class="material-icons" style="font-size:24px">group</i> Personal Statistics</a>
+                <a href="apipage2.html"> <i class="fa fa-id-card-o" style="font-size:24px"></i> Cards & Decks</a>
+                <a class = "active" href="apipage3.html"> <i class="fa fa-check-circle" style="font-size:24px"></i> Achievements</a>
+                <a href = "apipage4.html"> <i class="fa fa-gift" style="font-size:24px"></i> Upcoming Chests</a>
             </div>
             <img src = """"banner.jpg"""" width = 100%>
             <h1>"""+str(userdata['name'])+ """'s Clash Royale Achievements & Badges </h1>
@@ -199,13 +210,18 @@ def processBtn():
             myfile3.close()
             #closes the third file and begins to write on myfile4
             myfile4.write("""
-            <head> <link rel = "stylesheet" type = "text/css" href = "clashroyale.css" /></head>
+            <head> <link rel = "stylesheet" type = "text/css" href = "clashroyale.css" /><title>Upcoming Chests</title>
+            <meta name="viewport" content="width=device-width, initial-scale=1"> <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+            <meta name="viewport" content="width=device-width, initial-scale=1"> <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+            <meta name="viewport" content="width=device-width, initial-scale=1"> <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+            <meta name="viewport" content="width=device-width, initial-scale=1"> <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+            </head>
             <body>
             <div class="topnav">
-                <a href="apipage1.html">Personal Statistics</a>
-                <a href="apipage2.html">Cards & Decks</a>
-                <a href="apipage3.html">Achievements</a>
-                <a class = "active" href = "apipage4.html">Upcoming Chests</a>
+                <a href="apipage1.html"><i class="material-icons" style="font-size:24px">group</i> Personal Statistics</a>
+                <a href="apipage2.html"> <i class="fa fa-id-card-o" style="font-size:24px"></i> Cards & Decks</a>
+                <a href="apipage3.html"> <i class="fa fa-check-circle" style="font-size:24px"></i> Achievements</a>
+                <a class = "active" href = "apipage4.html"> <i class="fa fa-gift" style="font-size:24px"></i> Upcoming Chests</a>
             </div>
             <img src = """"banner.jpg"""" width = 100%>
             <h3>Here are your upcoming chests. Chest ranking: Silver, Gold, Magical, Giant, Mega Lightning, Epic, Legendary Chest.</h3>
@@ -298,7 +314,7 @@ root.geometry("650x500")
 root.configure(background = '#aec6cf') #colour is chosen
 
 #label
-label = Label(root, text = "Find out your clash royale statistics!")
+label = Label(root, text = "Enter your player tag: #")
 label.grid(row = 1, column = 1)
 label.configure(background = '#aec6cf')
 
@@ -312,14 +328,19 @@ btnName.grid(row = 2, column = 1, columnspan = 2)
 
 #image 1
 img = ImageTk.PhotoImage(Image.open("banner2.png"))
-panel = Label(root, image = img, borderwidth=0)
+panel = Label(root, image = img, borderwidth = 0, highlightthickness = 0, padx = 0, pady = 0)
 panel.grid(row = 0, column = 0, columnspan = 4)
 
 #image 2
 img2 = ImageTk.PhotoImage(Image.open("king.png"))
-panel2 = Label(root, image = img2, borderwidth = 0)
+panel2 = Label(root, image = img2, borderwidth = 0, highlightthickness = 0,  padx = 0, pady = 0)
 panel2.grid(row = 1, column = 0, rowspan = 2)
 
-
+try: #Tries to access google.com. If it works continue with code
+    x = requests.get("http://google.com")
+except ConnectionError as e: #if google.com cannot be accessed, the code displays a message saying there was a wifi error
+    messagebox.showinfo("WiFi Error", "Please Connect with WiFi to continue")
+    
+    
 
 root.mainloop()
